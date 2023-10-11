@@ -46,6 +46,15 @@ public abstract class Account implements Comparable<Account> {
 
     }
 
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public void setBalance(double value) {
+        this.balance += value;
+    }
+
+
 
 
 }
