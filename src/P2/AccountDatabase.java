@@ -25,7 +25,7 @@ public class AccountDatabase {
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
             if (this.accounts[i].compareTo(account) > 0) {
-                return true
+                return true;
             }
         }
 
@@ -33,19 +33,52 @@ public class AccountDatabase {
     } //overload if necessary
 
     public boolean open(Account account) {
+        if (this.numAcct == this.accounts.length - 2) {
+            grow();
+        }
 
+        this.accounts[this.numAcct] = account;
+        this.numAcct += 1;
+
+        return true;
     } //add a new account
 
     public boolean close(Account account) {
+        if (!contains(account)) {
+            return false;
+        }
+        int index = find(account);
+
+        for (int i = index; i < this.numAcct - 1; i++) {
+            this.accounts[i] = this.accounts[i+1];
+        }
+
+        return true;
 
     } //remove the given account
 
     public boolean withdraw(Account account) {
+        int index = find(account);
 
+        if (index < 0) {
+            return false;
+        }
+
+        Account selectedAccount = this.accounts[index];
+        if (selectedAccount.getBalance() < account.getBalance()) {
+            return false;
+        }
+
+        selectedAccount.setBalance(-account.getBalance());
+
+        return true;
     } //false if insufficient fund
 
     public void deposit(Account account) {
+        int index = find(account);
 
+        Account selectedAccount = this.accounts[index];
+        selectedAccount.setBalance(account.getBalance());
     }
 
     public void printSorted(){
