@@ -2,8 +2,16 @@ package P2;
 
 public class AccountDatabase {
 
+
     private Account [] accounts; //list of various types of accounts
+
+
     private int numAcct; //number of accounts in the array
+
+    public AccountDatabase() {
+        this.accounts = new Account[4];
+        this.numAcct = 0;
+    }
 
     private int find(Account account) {
         for (int i = 0; i < this.numAcct; i++) {

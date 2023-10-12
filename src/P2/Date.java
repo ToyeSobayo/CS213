@@ -1,6 +1,19 @@
+/*
 package P2;
 
 import java.util.Calendar;
+
+
+*/
+/**
+ * The date class allows us to represent a date object, consisting of a month, day, and year. It also has helper methods
+ * isValid, isFuture, moreThanSix, and leapYear to help determine if a date is valid. Methods compareTo and equals are
+ * also implemented to help with comparison of dates.
+ *
+ * @author Toye Sobayo
+ *//*
+
+
 public class Date implements Comparable<Date> {
 
     // Months
@@ -36,29 +49,21 @@ public class Date implements Comparable<Date> {
     private int month;
     private int year;
 
+
+    */
+/**
+     * get year
+     * @return year
+     *//*
+
+
     public int getYear () {
         return year;
     }
 
-    public int getMonth () {
-        return month;
-    }
 
-    public int getDay () {
-        return day;
-    }
 
-    public void setYear (int year) {
-        this.year = year;
-    }
-
-    public void setMonth (int month){
-        this.month = month;
-    }
-
-    public void setDay (int day){
-        this.day = day;
-    }
+    // Constructor to get current date
 
     public Date() {
         Calendar calendar = Calendar.getInstance();
@@ -68,11 +73,23 @@ public class Date implements Comparable<Date> {
         this.year = calendar.get(Calendar.YEAR);
     }
 
-    public Date( int month, int day, int year){
+
+    // Constructor to set month, day, and year based off of arguments
+
+    public Date(int month, int day, int year){
+
         this.month = month;
         this.day = day;
         this.year = year;
     }
+
+
+    */
+/**
+     * See if a date is valid
+     * @return true, else false
+     *//*
+
 
     public boolean isValid () {
         // Days need to align with month
@@ -95,6 +112,13 @@ public class Date implements Comparable<Date> {
     }
 
 
+    */
+/**
+     * See if a date is in the future
+     * @return true, or false
+     *//*
+
+
     public boolean isFuture () {
         Calendar potentialDate = Calendar.getInstance();
         potentialDate.set(this.year, this.month, this.day);
@@ -105,6 +129,7 @@ public class Date implements Comparable<Date> {
 
         return future > 0;
     }
+
 
     // TODO: finish method
     boolean moreThanSix() {
@@ -124,11 +149,36 @@ public class Date implements Comparable<Date> {
             return true;
         }
 
+    */
+/**
+     * See if a date is more than six months in the future
+     * @return true, or false
+     *//*
+
+    public boolean moreThanSix () {
+        Calendar date = Calendar.getInstance();
+        date.set(this.year, this.month, this.day);
+        Calendar potentialDate = Calendar.getInstance();
+        potentialDate.add(Calendar.MONTH, 7);
+        return date.compareTo(potentialDate) > 0;
+
+>>>>>>> 11cecb3e7982f66d57f393b9c97ffaf643ed28f4
+
     }
+
 
 
     // private leap year method
 
+
+    */
+/**
+     * see if a year is a leapyear
+     * @param year
+     * @return true, or false
+     *//*
+
+>>>>>>> 11cecb3e7982f66d57f393b9c97ffaf643ed28f4
     private boolean leapYear ( int year){
         if (year % QUADRENNIAL != 0) {
             return false;
@@ -139,12 +189,22 @@ public class Date implements Comparable<Date> {
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    */
+/**
+     * toString
+     * @return string representation
+     *//*
+
+>>>>>>> 11cecb3e7982f66d57f393b9c97ffaf643ed28f4
     @Override
     public String toString () {
         return (this.month + "/" + this.day + "/" + this.year);
 
     }
 
+<<<<<<< HEAD
     // CompareTo
     // TODO: finish method
 
@@ -167,14 +227,44 @@ public class Date implements Comparable<Date> {
 
     }
 
+=======
+    */
+/**
+     * Compare 2 dates
+     * @param date the object to be compared.
+     * @return
+     *//*
+
+
+    public int compareTo (Date date) {
+
+        Calendar potentialDate = Calendar.getInstance();
+        potentialDate.set(date.year, date.month, date.day);
+
+        Calendar present = Calendar.getInstance();
+
+        return present.compareTo(potentialDate);
+    }
+
+
+    */
+/**
+     * See if 2 dates are equal
+     * @param date
+     * @return
+     *//*
+
+>>>>>>> 11cecb3e7982f66d57f393b9c97ffaf643ed28f4
     public boolean equals(Date date) {
         return (this.day == date.day
                 && this.month == date.month
                 && this.year == date.year);
     }
+<<<<<<< HEAD
 
 
-   /* public static void main(String [] args) {
+   */
+/* public static void main(String [] args) {
         Calendar potentialDate = Calendar.getInstance();
         potentialDate.set(2030, 12, 24);
         System.out.println(potentialDate.getTime());
@@ -183,8 +273,12 @@ public class Date implements Comparable<Date> {
 
         System.out.println(present.compareTo(potentialDate));
 
-    }*/
+    }*//*
+
 }
 
 
 
+=======
+>>>>>>> 11cecb3e7982f66d57f393b9c97ffaf643ed28f4
+*/
