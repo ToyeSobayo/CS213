@@ -1,2 +1,4 @@
-package P2;public class RunProject2 {
+package P2;
+
+public class RunProject2 {
 }

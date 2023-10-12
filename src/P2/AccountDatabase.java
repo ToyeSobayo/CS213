@@ -1,6 +1,7 @@
 package P2;
 
 public class AccountDatabase {
+
     private Account [] accounts; //list of various types of accounts
     private int numAcct; //number of accounts in the array
 
@@ -10,17 +11,16 @@ public class AccountDatabase {
                 return i;
             }
         }
-
         return -1;
     } //search for an account in the array
 
-    private void grow() {
+    /*private void grow() {
         Account[] newAccounts = new Account[this.accounts.length + 4];
 
         for (int i = 0; i < this.numAcct; i++) {
             newAccounts[i] = this.accounts[i];
         }
-    } //increase the capacity by 4
+    } //increase the capacity by 4*/
 
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
@@ -32,7 +32,7 @@ public class AccountDatabase {
         return false;
     } //overload if necessary
 
-    public boolean open(Account account) {
+    /*public boolean open(Account account) {
         if (this.numAcct == this.accounts.length - 2) {
             grow();
         }
@@ -41,7 +41,7 @@ public class AccountDatabase {
         this.numAcct += 1;
 
         return true;
-    } //add a new account
+    } //add a new account*/
 
     public boolean close(Account account) {
         if (!contains(account)) {
@@ -92,4 +92,5 @@ public class AccountDatabase {
     public void printUpdatedBalances() {
 
     } //apply the interests/fees
+
 }

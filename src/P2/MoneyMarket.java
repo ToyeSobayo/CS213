@@ -1,2 +1,4 @@
-package P2;public class MoneyMarket {
+package P2;
+
+public class MoneyMarket {
 }

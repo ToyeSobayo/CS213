@@ -1,2 +1,4 @@
-package P2;public class TransactionManager {
+package P2;
+
+public class TransactionManager {
 }
