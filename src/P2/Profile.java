@@ -13,7 +13,7 @@ public class Profile implements Comparable<Profile> {
      * @param lname Last name of the account holder.
      * @param dob of birth of the account holder.
      */
-    private Profile(String fname, String lname, Date dob) {
+    public Profile(String fname, String lname, Date dob) {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
