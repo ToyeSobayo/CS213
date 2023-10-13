@@ -3,7 +3,8 @@ package P2;
 public abstract class Account implements Comparable<Account> {
 
     protected Profile holder;
-    protected  double balance;
+    protected double balance;
+    protected int MONTH = 12;
 
     /**
      * Constructor for an account.
@@ -30,7 +31,9 @@ public abstract class Account implements Comparable<Account> {
      *
      * @return The monthly fee for the account.
      */
-    public  abstract double monthlyFee();
+    public abstract double monthlyFee();
+
+    public abstract String toString();
 
     /**
      * Compares this account to another account.
@@ -53,6 +56,8 @@ public abstract class Account implements Comparable<Account> {
     public void setBalance(double value) {
         this.balance += value;
     }
+
+
 
 
 
