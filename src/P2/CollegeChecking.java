@@ -38,6 +38,11 @@ public class CollegeChecking extends Checking {
         return FEE_COLLEGE_CHECKING;
     }
 
+    @Override
+    public String toString() {
+        return this.holder.toString() + "(CC)";
+    }
+
 
 
 }
