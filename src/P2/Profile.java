@@ -41,9 +41,15 @@ public class Profile implements Comparable<Profile> {
         }
 
         int firstNameComparison = this.fname.compareTo(otherProfile.fname);
-        if (firstNameComparison != 0) {
+        if (firstNameComparison != 0) {;
             return firstNameComparison;
         }
+
         return this.dob.compareTo(otherProfile.dob);
+    }
+
+    @Override
+    public String toString() {
+        return this.fname + " " + this.lname + " " + this.dob.toString();
     }
 }
