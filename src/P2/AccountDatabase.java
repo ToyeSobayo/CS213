@@ -28,11 +28,13 @@ public class AccountDatabase {
         for (int i = 0; i < this.numAcct; i++) {
             newAccounts[i] = this.accounts[i];
         }
+
+        this.accounts = newAccounts;
     } //increase the capacity by 4
 
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
-            if (this.accounts[i].compareTo(account) > 0) {
+            if (this.accounts[i].compareTo(account) == 0) {
                 return true;
             }
         }
@@ -41,12 +43,16 @@ public class AccountDatabase {
     } //overload if necessary
 
     public boolean open(Account account) {
-        if (this.numAcct == this.accounts.length - 2) {
-            grow();
+        if (contains(account)) {
+            return false;
         }
 
         this.accounts[this.numAcct] = account;
         this.numAcct += 1;
+
+        if (this.numAcct == this.accounts.length) {
+            grow();
+        }
 
         return true;
     } //add a new account
