@@ -16,4 +16,9 @@ public class MoneyMarket extends Savings {
         super(holder, balance, isLoyal);
         this.withdrawal = 0;
     }
+
+    @Override
+    public String toString() {
+        return this.holder.toString() + "(MM)";
+    }
 }
