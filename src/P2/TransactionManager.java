@@ -91,8 +91,13 @@ public class TransactionManager {
 
             Account account = new Checking(profile, balance);
 
-            db.open(account);
-            System.out.println(account.toString());
+            if (db.open(account)) {
+                System.out.println(account.toString() + " opened.");
+            }
+
+            else {
+                System.out.println(account.toString() + " is already in the database.");
+            }
 
         }
 
@@ -117,6 +122,7 @@ public class TransactionManager {
                 balance = Double.parseDouble(accountParts[4]);
                 if (balance <= 0) {
                     System.out.println("Initial deposit cannot be 0 or negative.");
+                    return;
                 }
             }
 
@@ -125,7 +131,7 @@ public class TransactionManager {
                 return;
             }
 
-            int cc = Integer.parseInt(accountParts[4]);
+            int cc = Integer.parseInt(accountParts[5]);
 
             Campus campus = findCampus(cc);
 
@@ -139,9 +145,15 @@ public class TransactionManager {
 
             Account account = new CollegeChecking(profile, balance, campus);
 
-            db.open(account);
+            if (db.open(account)) {
+                System.out.println(account.toString() + " opened.");
+            }
 
-            System.out.println(account.toString());
+            else {
+                System.out.println(account.toString() + " is already in the database.");
+            }
+
+
         }
 
         else if (type.equals("S")) {
@@ -159,7 +171,7 @@ public class TransactionManager {
 
     private Campus findCampus(int campus) {
         for (Campus c : Campus.values()) {
-            if (Integer.parseInt(c.name()) == campus) {
+            if (c.getCode() == campus) {
                 return c;
             }
         }
