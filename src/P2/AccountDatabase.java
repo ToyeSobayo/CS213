@@ -34,8 +34,27 @@ public class AccountDatabase {
 
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
-            if (this.accounts[i].compareTo(account) == 0) {
-                return true;
+            if (account instanceof Checking) {
+                if ((this.accounts[i] instanceof Checking
+                        || this.accounts[i] instanceof CollegeChecking)
+                        && this.accounts[i].compareTo(account) == 0) {
+                    return true;
+                }
+            }
+
+            else if (account instanceof CollegeChecking) {
+                if ((this.accounts[i] instanceof CollegeChecking
+                        || this.accounts[i] instanceof Checking)
+                        && this.accounts[i].compareTo(account) == 0) {
+                    return true;
+                }
+            }
+
+            else {
+                if (this.accounts[i].getClass() == account.getClass()
+                        && this.accounts[i].compareTo(account) == 0) {
+                    return true;
+                }
             }
         }
 
