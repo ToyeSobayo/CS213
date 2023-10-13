@@ -12,6 +12,7 @@ public class Checking extends Account {
 
 
 
+
     /**
      * Constructor for a checking account.
      *
@@ -42,7 +43,5 @@ public class Checking extends Account {
     }
 
     @Override
-    public int compareTo(Account o) {
-        return 0;
-    }
+    // might need toString
 }

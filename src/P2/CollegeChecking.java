@@ -31,6 +31,7 @@ public class CollegeChecking extends Checking {
 
     @Override
     public double monthlyInterest() {
+        // get rid of 12
         return balance * INTEREST_RATE_COLLEGE_CHECKING / 12;
     }
     /**
@@ -43,6 +44,7 @@ public class CollegeChecking extends Checking {
         return FEE_COLLEGE_CHECKING;
     }
 
+    // toString()
 
 
 }
