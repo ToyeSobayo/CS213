@@ -42,7 +42,7 @@ public class Checking extends Account {
     }
 
     @Override
-    public int compareTo(Account o) {
-        return 0;
+    public String toString() {
+        return this.holder.toString() + "(C)";
     }
 }
