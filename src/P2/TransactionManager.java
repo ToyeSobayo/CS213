@@ -157,14 +157,100 @@ public class TransactionManager {
         }
 
         else if (type.equals("S")) {
-            if (accountParts.length < 5) {
+            if (accountParts.length < 6) {
                 System.out.println("Missing data for opening an account.");
+            }
+
+            String fname = accountParts[1];
+            String lname = accountParts[2];
+            String date = accountParts[3];
+
+            String[] dobParts = date.split("/");
+            int month = Integer.parseInt(dobParts[0]);
+            int day = Integer.parseInt(dobParts[1]);
+            int year = Integer.parseInt(dobParts[2]);
+
+            double balance;
+
+            try {
+                balance = Double.parseDouble(accountParts[4]);
+                if (balance <= 0) {
+                    System.out.println("Initial deposit cannot be 0 or negative.");
+                    return;
+                }
+            }
+
+            catch (NumberFormatException e){
+                System.out.println("Not a valid amount.");
+                return;
+            }
+
+            int loyaltyCode = Integer.parseInt(accountParts[5]);
+
+            boolean isLoyal = loyaltyCode == 1;
+
+            Date dob = new Date(month, day, year);
+
+            Profile profile = new Profile(fname, lname, dob);
+
+            Account account = new Savings(profile, balance, isLoyal);
+
+            if (db.open(account)) {
+                System.out.println(account.toString() + " opened.");
+            }
+
+            else {
+                System.out.println(account.toString() + " is already in the database.");
             }
         }
 
         else if (type.equals("MM")) {
-            if (accountParts.length < 4) {
+            if (accountParts.length < 5) {
                 System.out.println("Missing data for opening an account.");
+                return;
+            }
+
+            String fname = accountParts[1];
+            String lname = accountParts[2];
+            String date = accountParts[3];
+
+            String[] dobParts = date.split("/");
+            int month = Integer.parseInt(dobParts[0]);
+            int day = Integer.parseInt(dobParts[1]);
+            int year = Integer.parseInt(dobParts[2]);
+
+            double balance;
+
+            try {
+                balance = Double.parseDouble(accountParts[4]);
+                if (balance <= 0) {
+                    System.out.println("Initial deposit cannot be 0 or negative.");
+                    return;
+                }
+
+                if (balance < 2000) {
+                    System.out.println("Minimum of $2000 to open a Money Market account.");
+                    return;
+                }
+            }
+
+            catch (NumberFormatException e){
+                System.out.println("Not a valid amount.");
+                return;
+            }
+
+            Date dob = new Date(month, day, year);
+
+            Profile profile = new Profile(fname, lname, dob);
+
+            Account account = new MoneyMarket(profile, balance, true);
+
+            if (db.open(account)) {
+                System.out.println(account.toString() + " opened.");
+            }
+
+            else {
+                System.out.println(account.toString() + " is already in the database.");
             }
         }
     }
