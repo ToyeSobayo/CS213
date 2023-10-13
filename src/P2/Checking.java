@@ -43,5 +43,8 @@ public class Checking extends Account {
     }
 
     @Override
-    // might need toString
+    public String toString() {
+        return this.holder.toString() + "(C)";
+    }
+
 }

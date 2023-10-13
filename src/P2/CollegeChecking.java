@@ -5,11 +5,6 @@ public class CollegeChecking extends Checking {
     private static final double INTEREST_RATE_COLLEGE_CHECKING = 0.01;
     private static final double FEE_COLLEGE_CHECKING = 0;
 
-    // Enum to represent different campuses?
-    public enum Campus {
-        NEW_BRUNSWICK, NEWARK, CAMDEN
-    }
-
     private Campus campus;
 
     /**
@@ -44,7 +39,15 @@ public class CollegeChecking extends Checking {
         return FEE_COLLEGE_CHECKING;
     }
 
+
     // toString()
+
+    @Override
+    public String toString() {
+        return this.holder.toString() + "(CC)";
+    }
+
+
 
 
 }

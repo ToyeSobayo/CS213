@@ -13,7 +13,7 @@ public class Profile implements Comparable<Profile> {
      * @param lname Last name of the account holder.
      * @param dob of birth of the account holder.
      */
-    private Profile(String fname, String lname, Date dob) {
+    public Profile(String fname, String lname, Date dob) {
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
@@ -41,9 +41,15 @@ public class Profile implements Comparable<Profile> {
         }
 
         int firstNameComparison = this.fname.compareTo(otherProfile.fname);
-        if (firstNameComparison != 0) {
+        if (firstNameComparison != 0) {;
             return firstNameComparison;
         }
+
         return this.dob.compareTo(otherProfile.dob);
+    }
+
+    @Override
+    public String toString() {
+        return this.fname + " " + this.lname + " " + this.dob.toString();
     }
 }
