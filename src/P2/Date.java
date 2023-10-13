@@ -211,9 +211,15 @@ public class Date implements Comparable<Date> {
         Calendar potentialDate = Calendar.getInstance();
         potentialDate.set(date.year, date.month, date.day);
 
-        Calendar present = Calendar.getInstance();
+        Calendar dob = Calendar.getInstance();
+        dob.set(this.year, this.month, this.day);
 
-        return present.compareTo(potentialDate);
+        if (dob.get(Calendar.YEAR) != potentialDate.get(Calendar.YEAR))
+            return dob.get(Calendar.YEAR) - potentialDate.get(Calendar.YEAR);
+        if (dob.get(Calendar.MONTH) != potentialDate.get(Calendar.MONTH))
+            return dob.get(Calendar.MONTH) - potentialDate.get(Calendar.MONTH);
+        return dob.get(Calendar.DAY_OF_MONTH) - potentialDate.get(Calendar.DAY_OF_MONTH);
+
     }
 
 
