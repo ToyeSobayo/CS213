@@ -52,12 +52,12 @@ public class Profile implements Comparable<Profile> {
      */
     @Override
     public int compareTo(Profile otherProfile) {
-        int lastNameComparison = this.lname.compareTo(otherProfile.lname);
+        int lastNameComparison = this.lname.compareToIgnoreCase(otherProfile.lname);
         if (lastNameComparison != 0) {
             return lastNameComparison;
         }
 
-        int firstNameComparison = this.fname.compareTo(otherProfile.fname);
+        int firstNameComparison = this.fname.compareToIgnoreCase(otherProfile.fname);
         if (firstNameComparison != 0) {;
             return firstNameComparison;
         }
