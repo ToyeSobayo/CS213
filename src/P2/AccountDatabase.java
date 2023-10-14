@@ -153,7 +153,7 @@ public class AccountDatabase {
         }
         // print the sorted accounts
         for (int i = 0; i < numAcct; i++) {
-            System.out.println(accounts[i].toString());
+            System.out.println(accounts[i].getClass() + "::" + accounts[i].toString() + ":: Balance " + accounts[i].getBalance());
         }
     }
 
