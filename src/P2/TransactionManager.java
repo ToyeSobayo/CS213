@@ -87,6 +87,21 @@ public class TransactionManager {
 
             Date dob = new Date(month, day, year);
 
+            if (!dob.isValid()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                return;
+            }
+
+            if (dob.isFuture()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                return;
+            }
+
+            if (dob.underSixteen()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                return;
+            }
+
             Profile profile = new Profile(fname, lname, dob);
 
             Account account = new Checking(profile, balance);
@@ -141,6 +156,21 @@ public class TransactionManager {
 
             Date dob = new Date(month, day, year);
 
+            if (!dob.isValid()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                return;
+            }
+
+            if (dob.isFuture()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                return;
+            }
+
+            if (dob.underSixteen()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                return;
+            }
+
             Profile profile = new Profile(fname, lname, dob);
 
             Account account = new CollegeChecking(profile, balance, campus);
@@ -191,6 +221,21 @@ public class TransactionManager {
 
             Date dob = new Date(month, day, year);
 
+            if (!dob.isValid()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                return;
+            }
+
+            if (dob.isFuture()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                return;
+            }
+
+            if (dob.underSixteen()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                return;
+            }
+
             Profile profile = new Profile(fname, lname, dob);
 
             Account account = new Savings(profile, balance, isLoyal);
@@ -240,6 +285,20 @@ public class TransactionManager {
             }
 
             Date dob = new Date(month, day, year);
+            if (!dob.isValid()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                return;
+            }
+
+            if (dob.isFuture()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                return;
+            }
+
+            if (dob.underSixteen()) {
+                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                return;
+            }
 
             Profile profile = new Profile(fname, lname, dob);
 
