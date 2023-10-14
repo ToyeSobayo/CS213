@@ -118,7 +118,7 @@ public class AccountDatabase {
         //type comparison
         String profileType1 = a1.getProfileType();
         String profileType2 = a2.getProfileType();
-        int typeComparison = profileType1.compareTo(profileType2);
+        int typeComparison = profileType1.compareToIgnoreCase(profileType2);
         if(typeComparison != 0) {
             return typeComparison > 0;
         }
@@ -126,12 +126,12 @@ public class AccountDatabase {
         Profile profile1 = a1.holder;
         Profile profile2 = a2.holder;
 
-        int lastNameComparison = profile1.getlname().compareTo(profile2.getlname());
+        int lastNameComparison = profile1.getlname().compareToIgnoreCase(profile2.getlname());
         if (lastNameComparison != 0) {
             return lastNameComparison > 0;
         }
 
-        int firstNameComparison = profile1.getfname().compareTo(profile2.getfname());
+        int firstNameComparison = profile1.getfname().compareToIgnoreCase(profile2.getfname());
         if (firstNameComparison != 0) {
             return  firstNameComparison > 0;
         }
