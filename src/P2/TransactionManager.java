@@ -30,8 +30,7 @@ public class TransactionManager {
                     break;
 
                 case "P":
-                    System.out.println("print");
-                    break;
+                    db.printSorted();
 
                 case "PI":
                     break;
