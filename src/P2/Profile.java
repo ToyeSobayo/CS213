@@ -27,6 +27,23 @@ public class Profile implements Comparable<Profile> {
         return lname;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setfname(String fname) {
+        this.fname = fname;
+    }
+
+    public void setlname(String lname) {
+        this.lname = lname;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+
     /**
      * Compares this profile to another profile.
      *
