@@ -126,17 +126,17 @@ public class Date implements Comparable<Date> {
             if (this.month == FEBRUARY) {
                 if (leapYear(this.year)) {
                     // implement leapYear helper method
-                    return (this.day < minDays || this.day > leapDay);
+                    return (this.day >= minDays && this.day <= leapDay);
                 } else {
-                    return (this.day < minDays || this.day > nonLeapDay);
+                    return (this.day >= minDays && this.day <= nonLeapDay);
                 }
             } else if (this.month == JANUARY || this.month == MARCH || this.month == MAY || this.month == JULY || this.month == AUGUST || this.month == OCTOBER || this.month == DECEMBER) {
-                return (this.day < minDays || this.day > max31Days);
+                return (this.day >= minDays && this.day <= max31Days);
             } else {
-                return (this.day < minDays || this.day > max30Days);
+                return (this.day > minDays && this.day < max30Days);
             }
         } else {
-            return true;
+            return false;
         }
     }
 
@@ -167,8 +167,19 @@ public class Date implements Comparable<Date> {
         Calendar potentialDate = Calendar.getInstance();
         potentialDate.add(Calendar.MONTH, 7);
         return date.compareTo(potentialDate) > 0;
+    }
 
+    public boolean underSixteen() {
+        Calendar dob = Calendar.getInstance();
+        dob.set(this.year, this.month - 1, this.day);
+        Calendar potentialDate = Calendar.getInstance();
+        potentialDate.add(Calendar.YEAR, -16);
+        return dob.compareTo(potentialDate) > 0;
 
+    }
+
+    public boolean underTwentyFour() {
+        return true;
     }
 
 
