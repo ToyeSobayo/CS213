@@ -146,8 +146,9 @@ public class Date implements Comparable<Date> {
      * @return true, or false
      */
     public boolean isFuture() {
+
         Calendar potentialDate = Calendar.getInstance();
-        potentialDate.set(this.year, this.month, this.day);
+        potentialDate.set(this.year, this.month-1, this.day);
 
         Calendar present = Calendar.getInstance();
 
@@ -178,8 +179,12 @@ public class Date implements Comparable<Date> {
 
     }
 
-    public boolean underTwentyFour() {
-        return true;
+    public boolean overTwentyFour() {
+        Calendar dob = Calendar.getInstance();
+        dob.set(this.year, this.month - 1, this.day);
+        Calendar potentialDate = Calendar.getInstance();
+        potentialDate.add(Calendar.YEAR, -24);
+        return dob.compareTo(potentialDate) < 0;
     }
 
 
