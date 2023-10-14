@@ -45,7 +45,7 @@ public class CollegeChecking extends Checking {
 
     @Override
     public String getProfileType() {
-        return "CollegeChecking";
+        return "College Checking";
     }
 
     @Override

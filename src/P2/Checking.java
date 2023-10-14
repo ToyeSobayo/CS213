@@ -43,7 +43,7 @@ public class Checking extends Account {
     }
 
     public String getProfileType() {
-        return "getProfileType";
+        return "Checking";
     }
 
     @Override
