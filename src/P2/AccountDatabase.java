@@ -178,6 +178,21 @@ public class AccountDatabase {
     } //calculate interests/fees
 
     public void printUpdatedBalances() {
+        for (int i = 0; i < numAcct; i++) {
+            Account currentAccount = accounts[i];
+            double monthlyInterest = currentAccount.monthlyInterest();
+            double monthlyFee = currentAccount.monthlyFee();
+
+            currentAccount.setBalance(-monthlyFee);
+            currentAccount.setBalance(monthlyInterest);
+
+            if (currentAccount instanceof MoneyMarket) {
+                // resetting the number of Withdrawls for MMS
+                ((MoneyMarket) currentAccount).resetWithdrawals();
+            }
+        }
+
+        //Update balance by applying fees and interests
 
     } //apply the interests/fees
 
