@@ -53,56 +53,56 @@ public class TransactionManager {
     private void verifyThenOpen(String input) {
         String[] accountParts = input.strip().split("\\s+");
 
+        if (accountParts.length < 5) {
+            System.out.println("Missing data for opening an account.");
+            return;
+        }
         String type = accountParts[0];
 
+        String fname = accountParts[1];
+        String lname = accountParts[2];
+        String date = accountParts[3];
+
+        String[] dobParts = date.split("/");
+        int month = Integer.parseInt(dobParts[0]);
+        int day = Integer.parseInt(dobParts[1]);
+        int year = Integer.parseInt(dobParts[2]);
+
+        double balance;
+
+        try {
+            balance = Double.parseDouble(accountParts[4]);
+            if (balance <= 0) {
+                System.out.println("Initial deposit cannot be 0 or negative.");
+                return;
+            }
+        }
+
+        catch (NumberFormatException e){
+            System.out.println("Not a valid amount.");
+            return;
+        }
+
+        Date dob = new Date(month, day, year);
+
+        if (!dob.isValid()) {
+            System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
+            return;
+        }
+
+        if (dob.isFuture()) {
+            System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
+            return;
+        }
+
+        if (dob.underSixteen()) {
+            System.out.println("DOB invalid: " + dob.toString() + " under 16.");
+            return;
+        }
+
+        Profile profile = new Profile(fname, lname, dob);
+
         if (type.equals("C")) {
-            if (accountParts.length < 5) {
-                System.out.println("Missing data for opening an account.");
-                return;
-            }
-
-            String fname = accountParts[1];
-            String lname = accountParts[2];
-            String date = accountParts[3];
-
-            String[] dobParts = date.split("/");
-            int month = Integer.parseInt(dobParts[0]);
-            int day = Integer.parseInt(dobParts[1]);
-            int year = Integer.parseInt(dobParts[2]);
-
-            double balance;
-
-            try {
-                balance = Double.parseDouble(accountParts[4]);
-                if (balance <= 0) {
-                    System.out.println("Initial deposit cannot be 0 or negative.");
-                }
-            }
-
-            catch (NumberFormatException e){
-                System.out.println("Not a valid amount.");
-                return;
-            }
-
-            Date dob = new Date(month, day, year);
-
-            if (!dob.isValid()) {
-                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
-                return;
-            }
-
-            if (dob.isFuture()) {
-                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day");
-                return;
-            }
-
-            if (dob.underSixteen()) {
-                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
-                return;
-            }
-
-            Profile profile = new Profile(fname, lname, dob);
-
             Account account = new Checking(profile, balance);
 
             if (db.open(account)) {
@@ -121,30 +121,6 @@ public class TransactionManager {
                 return;
             }
 
-            String fname = accountParts[1];
-            String lname = accountParts[2];
-            String date = accountParts[3];
-
-            String[] dobParts = date.split("/");
-            int month = Integer.parseInt(dobParts[0]);
-            int day = Integer.parseInt(dobParts[1]);
-            int year = Integer.parseInt(dobParts[2]);
-
-            double balance;
-
-            try {
-                balance = Double.parseDouble(accountParts[4]);
-                if (balance <= 0) {
-                    System.out.println("Initial deposit cannot be 0 or negative.");
-                    return;
-                }
-            }
-
-            catch (NumberFormatException e){
-                System.out.println("Not a valid amount.");
-                return;
-            }
-
             int cc = Integer.parseInt(accountParts[5]);
 
             Campus campus = findCampus(cc);
@@ -154,29 +130,10 @@ public class TransactionManager {
                 return;
             }
 
-            Date dob = new Date(month, day, year);
-
-            if (!dob.isValid()) {
-                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
-                return;
-            }
-
-            if (dob.isFuture()) {
-                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
-                return;
-            }
-
-            if (dob.underSixteen()) {
-                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
-                return;
-            }
-
             if (dob.overTwentyFour()) {
                 System.out.println("DOB invalid: " + dob.toString() + " over 24.");
                 return;
             }
-
-            Profile profile = new Profile(fname, lname, dob);
 
             Account account = new CollegeChecking(profile, balance, campus);
 
@@ -196,53 +153,9 @@ public class TransactionManager {
                 System.out.println("Missing data for opening an account.");
             }
 
-            String fname = accountParts[1];
-            String lname = accountParts[2];
-            String date = accountParts[3];
-
-            String[] dobParts = date.split("/");
-            int month = Integer.parseInt(dobParts[0]);
-            int day = Integer.parseInt(dobParts[1]);
-            int year = Integer.parseInt(dobParts[2]);
-
-            double balance;
-
-            try {
-                balance = Double.parseDouble(accountParts[4]);
-                if (balance <= 0) {
-                    System.out.println("Initial deposit cannot be 0 or negative.");
-                    return;
-                }
-            }
-
-            catch (NumberFormatException e){
-                System.out.println("Not a valid amount.");
-                return;
-            }
-
             int loyaltyCode = Integer.parseInt(accountParts[5]);
 
             boolean isLoyal = loyaltyCode == 1;
-
-            Date dob = new Date(month, day, year);
-
-            if (!dob.isValid()) {
-                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
-                return;
-            }
-
-            if (dob.isFuture()) {
-                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
-                return;
-            }
-
-            if (dob.underSixteen()) {
-                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
-                return;
-            }
-
-
-            Profile profile = new Profile(fname, lname, dob);
 
             Account account = new Savings(profile, balance, isLoyal);
 
@@ -256,57 +169,10 @@ public class TransactionManager {
         }
 
         else if (type.equals("MM")) {
-            if (accountParts.length < 5) {
-                System.out.println("Missing data for opening an account.");
+            if (balance < 2000) {
+                System.out.println("Minimum of $2000 to open a Money Market account.");
                 return;
             }
-
-            String fname = accountParts[1];
-            String lname = accountParts[2];
-            String date = accountParts[3];
-
-            String[] dobParts = date.split("/");
-            int month = Integer.parseInt(dobParts[0]);
-            int day = Integer.parseInt(dobParts[1]);
-            int year = Integer.parseInt(dobParts[2]);
-
-            double balance;
-
-            try {
-                balance = Double.parseDouble(accountParts[4]);
-                if (balance <= 0) {
-                    System.out.println("Initial deposit cannot be 0 or negative.");
-                    return;
-                }
-
-                if (balance < 2000) {
-                    System.out.println("Minimum of $2000 to open a Money Market account.");
-                    return;
-                }
-            }
-
-            catch (NumberFormatException e){
-                System.out.println("Not a valid amount.");
-                return;
-            }
-
-            Date dob = new Date(month, day, year);
-            if (!dob.isValid()) {
-                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
-                return;
-            }
-
-            if (dob.isFuture()) {
-                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
-                return;
-            }
-
-            if (dob.underSixteen()) {
-                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
-                return;
-            }
-
-            Profile profile = new Profile(fname, lname, dob);
 
             Account account = new MoneyMarket(profile, balance, true);
 
