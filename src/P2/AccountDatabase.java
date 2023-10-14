@@ -160,6 +160,20 @@ public class AccountDatabase {
     //sort by account type and profile
 
     public void printFeesAndInterests() {
+    for (int i = 0; i < numAcct; i++) {
+        Account currentAccount = accounts[i];
+        double montlyInterest = currentAccount.monthlyInterest();
+        double monthlyFee = currentAccount.monthlyFee();
+
+        // Display fees and interests with 2 decimal places
+        String formattedInterest = String.format("% 2f", montlyInterest);
+        String formattedFee = String.format(".2f", monthlyFee);
+
+        String accountInfo = currentAccount.toString();
+
+        // Add with fee and monthly interest
+        System.out.println(accountInfo + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+    }
 
     } //calculate interests/fees
 
