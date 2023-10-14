@@ -114,9 +114,50 @@ public class AccountDatabase {
         selectedAccount.setBalance(account.getBalance());
     }
 
-    public void printSorted(){
+    private boolean shouldSwap(Account a1, Account a2) {
+        //type comparison
+        String profileType1 = a1.getProfileType();
+        String profileType2 = a2.getProfileType();
+        int typeComparison = profileType1.compareTo(profileType2);
+        if(typeComparison != 0) {
+            return typeComparison > 0;
+        }
+        //last name comparison
+        Profile profile1 = a1.holder;
+        Profile profile2 = a2.holder;
 
-    } //sort by account type and profile
+        int lastNameComparison = profile1.getlname().compareTo(profile2.getlname());
+        if (lastNameComparison != 0) {
+            return lastNameComparison > 0;
+        }
+
+        int firstNameComparison = profile1.getfname().compareTo(profile2.getfname());
+        if (firstNameComparison != 0) {
+            return  firstNameComparison > 0;
+        }
+
+        int dobComparison = profile1.getDob().compareTo(profile2.getDob());
+        return dobComparison > 0;
+    }
+    public void printSorted(){
+        // Bubble sort
+        for (int i = 0; i < numAcct - 1; i++) {
+            for (int j = 0; j < numAcct - i - 1; j++) {
+                if (shouldSwap(accounts[j], accounts[j + 1])) {
+                    // Swap accounts[j + 1] and accounts[j]
+                    Account temp = accounts[j];
+                    accounts[j] = accounts[j + 1];
+                    accounts[j + 1] = temp;
+                }
+            }
+        }
+        // print the sorted accounts
+        for (int i = 0; i < numAcct; i++) {
+            System.out.println(accounts[i].toString());
+        }
+    }
+
+    //sort by account type and profile
 
     public void printFeesAndInterests() {
 

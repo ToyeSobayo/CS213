@@ -46,7 +46,9 @@ public class MoneyMarket extends Savings {
 
 
 
-
+    public String getProfileType() {
+        return "MoneyMarket Savings";
+    }
 
     @Override
     public String toString() {

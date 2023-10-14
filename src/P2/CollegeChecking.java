@@ -42,6 +42,12 @@ public class CollegeChecking extends Checking {
 
     // toString()
 
+
+    @Override
+    public String getProfileType() {
+        return "CollegeChecking";
+    }
+
     @Override
     public String toString() {
         return this.holder.toString() + "(CC)";

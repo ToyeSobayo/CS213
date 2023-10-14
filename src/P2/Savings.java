@@ -38,7 +38,9 @@ public class Savings extends Account {
     }
 
 
-
+    public String getProfileType() {
+        return "Savings";
+    }
     @Override
     public String toString() {
         return this.holder.toString() + "(S)";

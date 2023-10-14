@@ -42,6 +42,10 @@ public class Checking extends Account {
         return MONTHLY_FEE;
     }
 
+    public String getProfileType() {
+        return "getProfileType";
+    }
+
     @Override
     public String toString() {
         return this.holder.toString() + "(C)";
