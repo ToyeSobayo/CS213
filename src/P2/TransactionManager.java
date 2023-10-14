@@ -88,17 +88,17 @@ public class TransactionManager {
             Date dob = new Date(month, day, year);
 
             if (!dob.isValid()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
                 return;
             }
 
             if (dob.isFuture()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day");
                 return;
             }
 
             if (dob.underSixteen()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
                 return;
             }
 
@@ -152,22 +152,28 @@ public class TransactionManager {
 
             if (campus == null) {
                 System.out.println("Invalid campus code.");
+                return;
             }
 
             Date dob = new Date(month, day, year);
 
             if (!dob.isValid()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
                 return;
             }
 
             if (dob.isFuture()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
                 return;
             }
 
             if (dob.underSixteen()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
+                return;
+            }
+
+            if (dob.overTwentyFour()) {
+                System.out.println("DOB invalid: " + dob.toString() + " over 24.");
                 return;
             }
 
@@ -222,19 +228,20 @@ public class TransactionManager {
             Date dob = new Date(month, day, year);
 
             if (!dob.isValid()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
                 return;
             }
 
             if (dob.isFuture()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
                 return;
             }
 
             if (dob.underSixteen()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
                 return;
             }
+
 
             Profile profile = new Profile(fname, lname, dob);
 
@@ -286,17 +293,17 @@ public class TransactionManager {
 
             Date dob = new Date(month, day, year);
             if (!dob.isValid()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " not a valid calendar date!");
+                System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
                 return;
             }
 
             if (dob.isFuture()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " cannot be today or a future day");
+                System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
                 return;
             }
 
             if (dob.underSixteen()) {
-                System.out.println("DOB Invalid: " + dob.toString() + " under 16.");
+                System.out.println("DOB invalid: " + dob.toString() + " under 16.");
                 return;
             }
 
