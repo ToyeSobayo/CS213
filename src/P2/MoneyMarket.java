@@ -20,6 +20,7 @@ public class MoneyMarket extends Savings {
         this.withdrawal = 0;
     }
 
+
     public double monthlyInterest() {
         return ((ANNUAL_INTEREST_RATE + BONUS) / MONTH);
     }
@@ -45,5 +46,11 @@ public class MoneyMarket extends Savings {
 
 
 
+
+
+    @Override
+    public String toString() {
+        return this.holder.toString() + "(MM)";
+    }
 
 }
