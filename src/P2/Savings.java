@@ -5,9 +5,10 @@ public class Savings extends Account {
     private static final double ANNUAL_INTEREST_RATES = 0.04;
     private static final double LOYAL_CUSTOMER_INTEREST_RATES = 0.0425;
     protected boolean isLoyal;
-    private static final double MONTHLY_FEE = 25;
-    private static final double  FEE_WAIVER = 500;
-    private static final double BONUS = 0.025;
+    protected static final double MONTHLY_FEE = 25;
+    private static final double FEE_WAIVER = 500;
+    protected static final double BONUS = 0.025;
+
 
 
     /**
@@ -35,6 +36,8 @@ public class Savings extends Account {
         }
         return MONTHLY_FEE;
     }
+
+
 
     @Override
     public String toString() {
