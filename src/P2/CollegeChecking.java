@@ -22,6 +22,10 @@ public class CollegeChecking extends Checking {
         super(holder);
     }
 
+    public CollegeChecking(Profile holder, double balance) {
+        super(holder, balance);
+    }
+
     /**
      * Calculates the monthly interest for the college checking account.
      *

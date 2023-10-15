@@ -26,6 +26,10 @@ public class Savings extends Account {
         super(holder);
     }
 
+    public Savings(Profile holder, double balance) {
+        super(holder, balance);
+    }
+
 
 
 
