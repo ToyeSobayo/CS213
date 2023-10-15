@@ -31,14 +31,11 @@ public class TransactionManager {
                     }
 
                     String accountString = account.toString();
-                    if (db.contains(account)) {
-                        if (db.close(account)) {
-                            System.out.println(account.toString() + " has been closed.");
-                        }
-                        else {
-                            System.out.println(accountString + " is not in the database.");
-                        }
+                    if (db.containsExact(account)) {
+                        db.close(account);
+                        System.out.println(account.toString() + " has been closed.");
                     }
+
                     else {
                         System.out.println(accountString + " is not in the database.");
                     }
@@ -46,7 +43,22 @@ public class TransactionManager {
                     break;
 
                 case "D":
-                    scanner.nextLine();
+                    input = scanner.nextLine();
+                    account = verifyThenDeposit(input);
+
+                    if (account == null) {
+                        break;
+                    }
+
+                    if (db.contains(account) && db.containsExact(account) ) {
+                        db.deposit(account);
+                        System.out.println(account.toString() + " Deposit - balance updated.");
+                    }
+                    else {
+                        System.out.println(account.toString() + " is not in the database.");
+                    }
+
+
                     break;
 
                 case "W":
@@ -277,6 +289,83 @@ public class TransactionManager {
 
         else if (type.equals("MM")) {
             account = new MoneyMarket(profile);
+        }
+
+        return account;
+    }
+
+    private Account verifyThenDeposit(String input) {
+        Account account = null;
+
+        String[] accountParts = input.strip().split("\\s+");
+
+        if (accountParts.length < 5) {
+            System.out.println("Missing data for opening an account.");
+            return null;
+        }
+        String type = accountParts[0];
+
+        String fname = accountParts[1];
+        String lname = accountParts[2];
+        String date = accountParts[3];
+
+        String[] dobParts = date.split("/");
+        int month = Integer.parseInt(dobParts[0]);
+        int day = Integer.parseInt(dobParts[1]);
+        int year = Integer.parseInt(dobParts[2]);
+
+        double balance;
+
+        try {
+            balance = Double.parseDouble(accountParts[4]);
+            if (balance <= 0) {
+                System.out.println("Deposit - amount cannot be 0 or negative.");
+                return null;
+            }
+        }
+
+        catch (NumberFormatException e){
+            System.out.println("Not a valid amount.");
+            return null;
+        }
+
+        Date dob = new Date(month, day, year);
+
+        if (!dob.isValid()) {
+            System.out.println("DOB invalid: " + dob.toString() + " not a valid calendar date!");
+            return null;
+        }
+
+        if (dob.isFuture()) {
+            System.out.println("DOB invalid: " + dob.toString() + " cannot be today or a future day.");
+            return null;
+        }
+
+        if (dob.underSixteen()) {
+            System.out.println("DOB invalid: " + dob.toString() + " under 16.");
+            return null;
+        }
+
+        Profile profile = new Profile(fname, lname, dob);
+
+        if (type.equals("C")) {
+            account = new Checking(profile, balance);
+        }
+
+        else if (type.equals("CC")) {
+            account = new CollegeChecking(profile, balance);
+        }
+
+        else if (type.equals("S")) {
+
+            account = new Savings(profile, balance);
+
+        }
+
+        else if (type.equals("MM")) {
+
+            account = new MoneyMarket(profile, balance);
+
         }
 
         return account;
