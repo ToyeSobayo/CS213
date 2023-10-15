@@ -32,6 +32,9 @@ public class AccountDatabase {
         this.accounts = newAccounts;
     } //increase the capacity by 4
 
+    public int getNumAcct() {
+        return this.numAcct;
+    }
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
             if (account instanceof Checking) {
@@ -152,14 +155,17 @@ public class AccountDatabase {
             }
         }
         // print the sorted accounts
+        System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
             System.out.println(accounts[i].getClass() + "::" + accounts[i].toString() + ":: Balance " + accounts[i].getBalance());
         }
+        System.out.println("*end of list.\n");
     }
 
     //sort by account type and profile
 
     public void printFeesAndInterests() {
+        System.out.println("*list of accounts with fee and monthly interest");
     for (int i = 0; i < numAcct; i++) {
         Account currentAccount = accounts[i];
         double montlyInterest = currentAccount.monthlyInterest();
@@ -174,6 +180,7 @@ public class AccountDatabase {
         // Add with fee and monthly interest
         System.out.println(accountInfo + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
     }
+    System.out.println("*end of list.");
 
     } //calculate interests/fees
 
