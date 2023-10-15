@@ -15,7 +15,7 @@ public class AccountDatabase {
 
     private int find(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
-            if (this.accounts[i].compareTo(account) > 0) {
+            if (this.accounts[i].getClass() == account.getClass() & this.accounts[i].compareTo(account) == 0) {
                 return i;
             }
         }
@@ -85,9 +85,15 @@ public class AccountDatabase {
         }
         int index = find(account);
 
+        if (index == -1) {
+            return false;
+        }
+
         for (int i = index; i < this.numAcct - 1; i++) {
             this.accounts[i] = this.accounts[i+1];
         }
+
+        this.numAcct -= 1;
 
         return true;
 
