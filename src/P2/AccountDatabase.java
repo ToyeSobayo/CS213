@@ -173,6 +173,19 @@ public class AccountDatabase {
         // print the sorted accounts
         System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
+            Account currentAccount = accounts[i];
+            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toString() + " :: Balance " + String.format("%.2", currentAccount.getBalance());
+
+            if (currentAccount instanceof  CollegeChecking) {
+                CollegeChecking collegeAccount = (CollegeChecking) currentAccount;
+                accountInfo += "::" + collegeAccount.getCampus();
+            } else if (currentAccount instanceof  MoneyMarket) {
+                MoneyMarket moneyMarketAccount = (MoneyMarket) currentAccount;
+                accountInfo += "::" + (moneyMarketAccount.loyaltyStatus() ? "is loyal" : "not loyal") + ":: withdrawal: " + moneyMarketAccount.withdrawalCount();
+            } else if (currentAccount instanceof Savings ){
+                Savings savingsAccount = (Savings) currentAccount;
+                accountInfo += savingsAccount.loyaltyStatus() ? "::is loyal" : "";
+            }
             System.out.println(accounts[i].getClass() + "::" + accounts[i].toString() + ":: Balance " + accounts[i].getBalance());
         }
         System.out.println("*end of list.\n");
