@@ -64,6 +64,16 @@ public class AccountDatabase {
         return false;
     } //overload if necessary
 
+    public boolean containsExact(Account account) {
+        for (int i = 0; i < this.numAcct; i++) {
+            if (this.accounts[i].getClass() == account.getClass()
+                    && this.accounts[i].compareTo(account) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean open(Account account) {
         if (contains(account)) {
             return false;
