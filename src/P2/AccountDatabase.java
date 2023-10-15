@@ -174,7 +174,7 @@ public class AccountDatabase {
         System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
-            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toString() + " :: Balance " + String.format("%.2", currentAccount.getBalance());
+            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toString() + " :: Balance " + String.format("%.2s", currentAccount.getBalance());
 
             if (currentAccount instanceof  CollegeChecking) {
                 CollegeChecking collegeAccount = (CollegeChecking) currentAccount;
