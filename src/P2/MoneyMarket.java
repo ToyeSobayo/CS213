@@ -20,6 +20,11 @@ public class MoneyMarket extends Savings {
         this.withdrawal = 0;
     }
 
+    public MoneyMarket(Profile holder) {
+        super(holder);
+        this.withdrawal = 0;
+    }
+
 
     public double monthlyInterest() {
         return ((ANNUAL_INTEREST_RATE + BONUS) / MONTH);

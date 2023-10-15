@@ -17,6 +17,10 @@ public abstract class Account implements Comparable<Account> {
         this.balance = balance;
     }
 
+    public Account(Profile holder) {
+        this.holder = holder;
+    }
+
     /**
      * Abstract method to calculate the monthly interest.
      * This method needs to be implemented by subclasses.

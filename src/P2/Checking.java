@@ -23,6 +23,10 @@ public class Checking extends Account {
     public Checking(Profile holder, double balance) {
         super(holder, balance);
     }
+
+    public Checking(Profile holder) {
+        super(holder);
+    }
     /**
      * Calculates the monthly interest for the checking account.
      *

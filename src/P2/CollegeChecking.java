@@ -18,6 +18,10 @@ public class CollegeChecking extends Checking {
         this.campus = campus;
     }
 
+    public CollegeChecking(Profile holder) {
+        super(holder);
+    }
+
     /**
      * Calculates the monthly interest for the college checking account.
      *

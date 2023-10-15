@@ -22,6 +22,12 @@ public class Savings extends Account {
         this.isLoyal = isLOYAL;
     }
 
+    public Savings(Profile holder) {
+        super(holder);
+    }
+
+
+
 
     @Override
     public double monthlyInterest() {
