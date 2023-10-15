@@ -19,30 +19,56 @@ public class TransactionManager {
                 case "O":
                     String input = scanner.nextLine();
                     verifyThenOpen(input);
+                    break;
 
                 case "C":
+                    scanner.nextLine();
                     break;
 
                 case "D":
+                    scanner.nextLine();
                     break;
 
                 case "W":
+                    scanner.nextLine();
                     break;
 
                 case "P":
-                    db.printSorted();
+                    if (db.getNumAcct() > 0) {
+                        db.printSorted();
+                    }
+                    else {
+                       System.out.println("Account Database is empty!");
+                    }
+                    break;
 
                 case "PI":
+                    if (db.getNumAcct() > 0) {
+                        db.printFeesAndInterests();
+                    }
+                    else {
+                        System.out.println("Account Database is empty!");
+                    }
+
                     break;
 
                 case "UB":
+                    if (db.getNumAcct() > 0) {
+                        db.printUpdatedBalances();
+                    }
+                    else {
+                        System.out.println("Account Database is empty!");
+                    }
+
                     break;
 
                 case "Q":
                     System.out.println("Transaction manager is terminated.");
+                    System.exit(1);
 
                 default:
                     System.out.println("Invalid command!");
+                    scanner.nextLine();
                     break;
 
             }
