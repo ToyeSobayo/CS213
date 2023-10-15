@@ -43,7 +43,11 @@ public class CollegeChecking extends Checking {
         return FEE_COLLEGE_CHECKING;
     }
 
+    // get campus method
 
+    public String getCampus() {
+        return this.campus.toString();
+    }
     // toString()
 
 

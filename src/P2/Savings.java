@@ -26,6 +26,9 @@ public class Savings extends Account {
         super(holder);
     }
 
+    public boolean loyaltyStatus() {
+        return this.isLoyal;
+    }
 
 
 
