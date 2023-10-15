@@ -186,7 +186,7 @@ public class AccountDatabase {
                 Savings savingsAccount = (Savings) currentAccount;
                 accountInfo += savingsAccount.loyaltyStatus() ? "::is loyal" : "";
             }
-            System.out.println(accounts[i].getClass() + "::" + accounts[i].toString() + ":: Balance " + accounts[i].getBalance());
+            System.out.println(currentAccount.toString());
         }
         System.out.println("*end of list.\n");
     }
