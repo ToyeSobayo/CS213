@@ -181,19 +181,29 @@ public class AccountDatabase {
         System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
-            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toStringNoType() + "::Balance " + String.format("$%,.2f", currentAccount.getBalance());
 
-            if (currentAccount instanceof  CollegeChecking) {
-                CollegeChecking collegeAccount = (CollegeChecking) currentAccount;
-                accountInfo += "::" + collegeAccount.getCampus();
-            } else if (currentAccount instanceof  MoneyMarket) {
-                MoneyMarket moneyMarketAccount = (MoneyMarket) currentAccount;
-                accountInfo += "::" + (moneyMarketAccount.loyaltyStatus() ? "is loyal" : "not loyal") + "::withdrawal: " + moneyMarketAccount.withdrawalCount();
-            } else if (currentAccount instanceof Savings ){
-                Savings savingsAccount = (Savings) currentAccount;
-                accountInfo += savingsAccount.loyaltyStatus() ? "::is loyal" : "";
+            if (currentAccount instanceof CollegeChecking) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) + "::" + ((CollegeChecking) currentAccount).getCampus());
             }
-            System.out.println(accountInfo);
+
+            else if (currentAccount instanceof Checking) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()));
+            }
+
+            else if (currentAccount instanceof MoneyMarket) {
+                System.out.println(currentAccount.getProfileType() + "::Savings::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) +
+                        (((MoneyMarket) currentAccount).isLoyal ? "::is loyal" : "") +
+                        "::withdrawal: " + (int)((MoneyMarket) currentAccount).withdrawalCount());
+            }
+            else if (currentAccount instanceof Savings) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) +
+                        (((Savings) currentAccount).isLoyal ? "::is loyal" : ""));
+            }
+
         }
         System.out.println("*end of list.\n");
     }
@@ -223,16 +233,39 @@ public class AccountDatabase {
         String formattedInterest = String.format("%.2f", montlyInterest);
         String formattedFee = String.format("%.2f", monthlyFee);
 
-        String accountInfo = currentAccount.toStringNoType();
+        String accountInfo = "";
+
+        if (currentAccount instanceof CollegeChecking) {
+            System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() +
+                    "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) + "::" +
+                    ((CollegeChecking) currentAccount).getCampus() +
+                    "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        } else if (currentAccount instanceof Checking) {
+            System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() +
+                    "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) +
+                    "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        } else if (currentAccount instanceof MoneyMarket) {
+            System.out.println(currentAccount.getProfileType() + "::Savings::" + currentAccount.toStringNoType() +
+                    "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) +
+                    (((MoneyMarket) currentAccount).isLoyal ? "::is loyal" : "") +
+                    "::withdrawal: " + (int) ((MoneyMarket) currentAccount).withdrawalCount() +
+                    "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        } else if (currentAccount instanceof Savings) {
+            System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() +
+                    "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) +
+                    (((Savings) currentAccount).loyaltyStatus() ? "::is loyal" : "") +
+                    "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        }
+
 
         // Add with fee and monthly interest
-        System.out.println(accountInfo + "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) + "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
     }
     System.out.println("*end of list.");
 
     } //calculate interests/fees
 
     public void printUpdatedBalances() {
+        System.out.println("*list of accounts with fees and interests applied.");
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
             double monthlyInterest = currentAccount.monthlyInterest();
@@ -241,12 +274,37 @@ public class AccountDatabase {
             currentAccount.setBalance(-monthlyFee);
             currentAccount.setBalance(monthlyInterest);
 
-            if (currentAccount instanceof MoneyMarket) {
+            if (currentAccount instanceof CollegeChecking) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) + "::" + ((CollegeChecking) currentAccount).getCampus());
+            }
+
+            else if (currentAccount instanceof Checking) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()));
+            }
+
+            else if (currentAccount instanceof MoneyMarket) {
                 // resetting the number of Withdrawls for MMS
                 ((MoneyMarket) currentAccount).resetWithdrawals();
+
+                System.out.println(currentAccount.getProfileType() + "::Savings::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) +
+                        (((MoneyMarket) currentAccount).isLoyal ? "::is loyal" : "") +
+                        "::withdrawal: " + (int)((MoneyMarket) currentAccount).withdrawalCount());
             }
-            System.out.println(currentAccount.toString());
+
+            else if (currentAccount instanceof Savings) {
+                System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() + "::Balance "
+                        + String.format("$%,.2f", currentAccount.getBalance()) +(
+                        ((Savings) currentAccount).loyaltyStatus() ? "::is loyal" : ""));
+            }
+
+
         }
+
+        System.out.println("*end of list.");
+
 
 
         //Update balance by applying fees and interests
