@@ -46,6 +46,10 @@ public class MoneyMarket extends Savings {
         if (this.balance < MINIMUM_DEPOSIT) {
             this.isLoyal = false;
         }
+
+        if (this.balance >= MINIMUM_DEPOSIT) {
+            this.isLoyal = false;
+        }
     }
 
 
@@ -58,7 +62,10 @@ public class MoneyMarket extends Savings {
     }
 
 
+    public void incrementWithdrawal() {
+        this.withdrawal += 1;
 
+    }
 
     public String getProfileType() {
         return "Money Market";
