@@ -122,6 +122,9 @@ public class AccountDatabase {
         }
 
         selectedAccount.setBalance(-account.getBalance());
+        if (selectedAccount instanceof MoneyMarket) {
+            ((MoneyMarket) selectedAccount).updateLoyaltyStatus();
+        }
 
         return true;
     } //false if insufficient fund
@@ -174,7 +177,7 @@ public class AccountDatabase {
         System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
-            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toString() + " :: Balance " + String.format("%.2s", currentAccount.getBalance());
+            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toStringNoType() + ":: Balance " + String.format("$%,.2f", currentAccount.getBalance());
 
             if (currentAccount instanceof  CollegeChecking) {
                 CollegeChecking collegeAccount = (CollegeChecking) currentAccount;
@@ -201,13 +204,13 @@ public class AccountDatabase {
         double monthlyFee = currentAccount.monthlyFee();
 
         // Display fees and interests with 2 decimal places
-        String formattedInterest = String.format("% 2f", montlyInterest);
-        String formattedFee = String.format(".2f", monthlyFee);
+        String formattedInterest = String.format("%.2f", montlyInterest);
+        String formattedFee = String.format("%.2f", monthlyFee);
 
-        String accountInfo = currentAccount.toString();
+        String accountInfo = currentAccount.toStringNoType();
 
         // Add with fee and monthly interest
-        System.out.println(accountInfo + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        System.out.println(accountInfo + " :: Balance " + String.format("$%,.2f", currentAccount.getBalance()) + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
     }
     System.out.println("*end of list.");
 
