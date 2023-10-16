@@ -226,7 +226,9 @@ public class AccountDatabase {
                 // resetting the number of Withdrawls for MMS
                 ((MoneyMarket) currentAccount).resetWithdrawals();
             }
+            System.out.println(currentAccount.toString());
         }
+
 
         //Update balance by applying fees and interests
 
