@@ -45,54 +45,54 @@ public class Date implements Comparable<Date> {
     private int year;
 
     /**
-     * get year
+     * Get the year of the date.
      *
-     * @return year
+     * @return The year of the date.
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * set year
+     * Get the month of the date.
      *
-     * @return year
+     * @return The month of the date.
      */
     public int getMonth() {
         return month;
     }
 
     /**
-     * get day
+     * Get the day of the date.
      *
-     * @return day
+     * @return The day of the date.
      */
     public int getDay() {
         return day;
     }
 
     /**
-     * set day
+     * Set the year of the date.
      *
-     * @return day
+     * @return The year of the date.
      */
     public int setYear(int year) {
         return this.year;
     }
 
     /**
-     * get month
+     * Set the month of the date.
      *
-     * @return month
+     * @return The month of the date.
      */
     public int setMonth(int month) {
         return this.month;
     }
 
     /**
-     * set month
+     * Set the day of the date.
      *
-     * @return month
+     * @return The day of the date.
      */
     public int setDay(int day) {
         return this.day;
@@ -116,9 +116,9 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * See if a date is valid
+     * Check if the date is valid.
      *
-     * @return true, else false
+     * @return true if the date is valid, otherwise false.
      */
     public boolean isValid() {
         // Days need to align with month
@@ -141,9 +141,9 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * See if a date is in the future
+     * Check if the date is in the future.
      *
-     * @return true, or false
+     * @return true if the date is in the future, otherwise false.
      */
     public boolean isFuture() {
 
@@ -158,9 +158,9 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * See if a date is more than six months in the future
+     * Check if the date is more than six months in the future.
      *
-     * @return true, or false
+     * @return true if the date is more than six months in the future, otherwise false.
      */
     public boolean moreThanSix() {
         Calendar date = Calendar.getInstance();
@@ -170,6 +170,11 @@ public class Date implements Comparable<Date> {
         return date.compareTo(potentialDate) > 0;
     }
 
+    /**
+     * Check if the date represents a person under sixteen years old.
+     *
+     * @return true if the date represents a person under sixteen, otherwise false.
+     */
     public boolean underSixteen() {
         Calendar dob = Calendar.getInstance();
         dob.set(this.year, this.month - 1, this.day);
@@ -179,6 +184,11 @@ public class Date implements Comparable<Date> {
 
     }
 
+    /**
+     * Check if the date represents a person over twenty-four years old.
+     *
+     * @return true if the date represents a person over twenty-four, otherwise false.
+     */
     public boolean overTwentyFour() {
         Calendar dob = Calendar.getInstance();
         dob.set(this.year, this.month - 1, this.day);
@@ -189,10 +199,9 @@ public class Date implements Comparable<Date> {
 
 
     /**
-     * see if a year is a leapyear
+     * Check if a year is a leap-year
      *
-     * @param year
-     * @return true, or false
+     * @return true if the year is a leap-year
      */
     private boolean leapYear(int year) {
         if (year % QUADRENNIAL != 0) {
@@ -205,9 +214,9 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * toString
+     * Convert the date to a string representation.
      *
-     * @return string representation
+     * @return A string representation of the date.
      */
     @Override
     public String toString() {
@@ -216,12 +225,11 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Compare 2 dates
+     * Compare two dates.
      *
-     * @param date the object to be compared.
-     * @return
+     * @param date The date to be compared.
+     * @return A value indicating the comparison of the dates.
      */
-
     public int compareTo(Date date) {
 
         Calendar potentialDate = Calendar.getInstance();
@@ -235,15 +243,13 @@ public class Date implements Comparable<Date> {
         if (dob.get(Calendar.MONTH) != potentialDate.get(Calendar.MONTH))
             return dob.get(Calendar.MONTH) - potentialDate.get(Calendar.MONTH);
         return dob.get(Calendar.DAY_OF_MONTH) - potentialDate.get(Calendar.DAY_OF_MONTH);
-
     }
 
-
     /**
-     * See if 2 dates are equal
+     * Check if two dates are equal.
      *
-     * @param date
-     * @return
+     * @param date The date to be compared.
+     * @return true if the dates are equal, otherwise false.
      */
     public boolean equals(Date date) {
         return (this.day == date.day

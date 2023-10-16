@@ -2,19 +2,30 @@ package P2;
 
 import java.text.DecimalFormat;
 
+/**
+ * Represents a database for managing accounts, providing operations for handling account information.
+ * Enables adding, removal, and retrieval, as well as sorting and tracking of accounts
+ * @author [Sean Thomas]
+ */
 public class AccountDatabase {
 
-
     private Account [] accounts; //list of various types of accounts
-
-
     private int numAcct; //number of accounts in the array
 
+    /**
+     * Initializes an AccountDatabase with a default capacity of 4 accounts.
+     */
     public AccountDatabase() {
         this.accounts = new Account[4];
         this.numAcct = 0;
     }
 
+    /**
+     * Searches for an account in the array.
+     *
+     * @param account The account to search for.
+     * @return The index of the account if found, otherwise -1.
+     */
     private int find(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
             if (this.accounts[i].getClass() == account.getClass() & this.accounts[i].compareTo(account) == 0) {
@@ -22,8 +33,11 @@ public class AccountDatabase {
             }
         }
         return -1;
-    } //search for an account in the array
+    }
 
+    /**
+     * Increases the capacity of the accounts array by 4.
+     */
     private void grow() {
         Account[] newAccounts = new Account[this.accounts.length + 4];
 
@@ -32,11 +46,23 @@ public class AccountDatabase {
         }
 
         this.accounts = newAccounts;
-    } //increase the capacity by 4
+    }
 
+    /**
+     * Retrieves the number of accounts in the database.
+     *
+     * @return The number of accounts.
+     */
     public int getNumAcct() {
         return this.numAcct;
     }
+
+    /**
+     * Checks if the given account exists in the database.
+     *
+     * @param account The account to check for.
+     * @return true if the account exists, otherwise false.
+     */
     public boolean contains(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
             if (account instanceof Checking) {
@@ -64,8 +90,14 @@ public class AccountDatabase {
         }
 
         return false;
-    } //overload if necessary
+    }
 
+    /**
+     * Checks if the given account exists exactly as it is in the database.
+     *
+     * @param account The account to check for.
+     * @return true if the exact account exists, otherwise false.
+     */
     public boolean containsExact(Account account) {
         for (int i = 0; i < this.numAcct; i++) {
             if (this.accounts[i].getClass() == account.getClass()
@@ -76,6 +108,12 @@ public class AccountDatabase {
         return false;
     }
 
+    /**
+     * Adds a new account to the database.
+     *
+     * @param account The account to add.
+     * @return true if the account was added, otherwise false.
+     */
     public boolean open(Account account) {
         if (contains(account)) {
             return false;
@@ -89,8 +127,14 @@ public class AccountDatabase {
         }
 
         return true;
-    } //add a new account
+    }
 
+    /**
+     * Removes the given account from the database.
+     *
+     * @param account The account to remove.
+     * @return true if the account was successfully removed, otherwise false.
+     */
     public boolean close(Account account) {
         if (!contains(account)) {
             return false;
@@ -109,8 +153,14 @@ public class AccountDatabase {
 
         return true;
 
-    } //remove the given account
+    }
 
+    /**
+     * Withdraws a certain amount from the specified account.
+     *
+     * @param account The account to withdraw from.
+     * @return true if the withdrawal was successful, otherwise false.
+     */
     public boolean withdraw(Account account) {
         int index = find(account);
 
@@ -130,8 +180,13 @@ public class AccountDatabase {
         }
 
         return true;
-    } //false if insufficient fund
+    }
 
+    /**
+     * Deposits a certain amount into the specified account.
+     *
+     * @param account The account to deposit into.
+     */
     public void deposit(Account account) {
         int index = find(account);
 
@@ -142,6 +197,13 @@ public class AccountDatabase {
         }
     }
 
+    /**
+     * Determines if two accounts should be swapped, helper method for bubble sort.
+     *
+     * @param a1 The first account.
+     * @param a2 The second account.
+     * @return true if the accounts should be swapped, otherwise false.
+     */
     private boolean shouldSwap(Account a1, Account a2) {
         //type comparison
         String profileType1 = a1.getProfileType();
@@ -167,6 +229,10 @@ public class AccountDatabase {
         int dobComparison = profile1.getDob().compareTo(profile2.getDob());
         return dobComparison > 0;
     }
+
+    /**
+     * Prints the accounts sorted by account type and profile.
+     */
     public void printSorted(){
         // Bubble sort
         for (int i = 0; i < numAcct - 1; i++) {
@@ -179,11 +245,10 @@ public class AccountDatabase {
                 }
             }
         }
-        // print the sorted accounts
+
         System.out.println("\n*Accounts sorted by account type and profile.");
 
         DecimalFormat df = new DecimalFormat("$#,##0.00");
-
 
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
@@ -209,14 +274,13 @@ public class AccountDatabase {
                         + df.format(currentAccount.getBalance()) +
                         (((Savings) currentAccount).isLoyal ? "::is loyal" : ""));
             }
-
         }
         System.out.println("*end of list.\n");
     }
 
-    //sort by account type and profile
-
-
+    /**
+     * Prints the accounts with their fees and monthly interests.
+     */
     public void printFeesAndInterests() {
         DecimalFormat df = new DecimalFormat("$#,##0.00");
         // Bubble sort
@@ -231,6 +295,7 @@ public class AccountDatabase {
             }
         }
         System.out.println("*list of accounts with fee and monthly interest");
+
     for (int i = 0; i < numAcct; i++) {
         Account currentAccount = accounts[i];
         double montlyInterest = currentAccount.monthlyInterest();
@@ -239,8 +304,6 @@ public class AccountDatabase {
         // Display fees and interests with 2 decimal places
         String formattedInterest = df.format(montlyInterest);
         String formattedFee = df.format(monthlyFee);
-
-        String accountInfo = "";
 
         if (currentAccount instanceof CollegeChecking) {
             System.out.println(currentAccount.getProfileType() + "::" + currentAccount.toStringNoType() +
@@ -263,14 +326,14 @@ public class AccountDatabase {
                     (((Savings) currentAccount).loyaltyStatus() ? "::is loyal" : "") +
                     "::fee " + formattedFee + "::monthly interest " + formattedInterest);
         }
-
-
-        // Add with fee and monthly interest
     }
     System.out.println("*end of list.");
 
-    } //calculate interests/fees
+    }
 
+    /**
+     * Prints the accounts with applied fees and interests.
+     */
     public void printUpdatedBalances() {
         DecimalFormat df = new DecimalFormat("$#,##0.00");
         System.out.println("*list of accounts with fees and interests applied.");
@@ -307,16 +370,7 @@ public class AccountDatabase {
                         + df.format(currentAccount.getBalance()) +(
                         ((Savings) currentAccount).loyaltyStatus() ? "::is loyal" : ""));
             }
-
-
         }
-
         System.out.println("*end of list.");
-
-
-
-        //Update balance by applying fees and interests
-
-    } //apply the interests/fees
-
+    }
 }

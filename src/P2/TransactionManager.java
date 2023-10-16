@@ -3,6 +3,13 @@ package P2;
 
 import java.util.Scanner;
 
+/**
+ * Handles banking transactions
+ * Takes in user input for opening, closing, depositing, and withdrawing.
+ * Also includes helper functions for all of these tasks
+ *
+ @author [Sean Thomas]
+ */
 public class TransactionManager {
 
     private AccountDatabase db = new AccountDatabase();
@@ -128,6 +135,12 @@ public class TransactionManager {
 
     }
 
+    /**
+     * Verifies input data and opens a new account based on the given information.
+     *
+     * @param input A string containing the necessary information for opening an account.
+     * @return An Account object if the account is successfully opened, null otherwise.
+     */
     private Account verifyThenOpen(String input) {
         Account account = null;
 
@@ -237,6 +250,12 @@ public class TransactionManager {
         return account;
     }
 
+    /**
+     * Verifies input data and closes an existing account based on the given information.
+     *
+     * @param input A string containing the necessary information for closing an account.
+     * @return An Account object if the account is successfully closed, null otherwise.
+     */
     private Account verifyThenClose(String input) {
         Account account = null;
 
@@ -314,6 +333,12 @@ public class TransactionManager {
         return account;
     }
 
+    /**
+     * Verifies input data and performs a deposit transaction for an existing account.
+     *
+     * @param input A string containing the necessary information for the deposit.
+     * @return An Account object if the deposit transaction is successful, null otherwise.
+     */
     private Account verifyThenDeposit(String input) {
         Account account = null;
 
@@ -391,6 +416,12 @@ public class TransactionManager {
         return account;
     }
 
+    /**
+     * Verifies input data and performs a withdrawal transaction for an existing account.
+     *
+     * @param input A string containing the necessary information for the withdrawal.
+     * @return An Account object if the withdrawal transaction is successful, null otherwise.
+     */
     private Account verifyThenWithdraw(String input) {
         Account account = null;
 
@@ -468,6 +499,11 @@ public class TransactionManager {
         return account;
     }
 
+    /**
+     * Opens a new account based on the input data and updates the database.
+     *
+     * @param input A string containing the necessary information for opening an account.
+     */
     private void openAccount(String input) {
         Account account = verifyThenOpen(input);
 
@@ -484,6 +520,12 @@ public class TransactionManager {
         }
     }
 
+    /**
+     * Finds the campus based on the given campus code.
+     *
+     * @param campus The integer code representing the campus.
+     * @return The corresponding Campus enum value, or null if no matching campus is found.
+     */
     private Campus findCampus(int campus) {
         for (Campus c : Campus.values()) {
             if (c.getCode() == campus) {
