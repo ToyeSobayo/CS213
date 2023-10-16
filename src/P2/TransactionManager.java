@@ -63,15 +63,20 @@ public class TransactionManager {
 
                 case "W":
                     input = scanner.nextLine();
-                    account = verifyThenDeposit(input);
+                    account = verifyThenWithdraw(input);
 
                     if (account == null) {
                         break;
                     }
 
                     if (db.contains(account) && db.containsExact(account) ) {
-                        db.withdraw(account);
-                        System.out.println(account.toString() + " Withdraw - balance updated.");
+                        if (db.withdraw(account)) {
+                            System.out.println(account.toString() + " Withdraw - balance updated.");
+                        }
+                        else {
+                            System.out.println(account.toString() + " Withdraw - insufficient fund.");
+                        }
+
                     }
                     else {
                         System.out.println(account.toString() + " is not in the database.");
@@ -411,7 +416,7 @@ public class TransactionManager {
         try {
             balance = Double.parseDouble(accountParts[4]);
             if (balance <= 0) {
-                System.out.println("Deposit - amount cannot be 0 or negative.");
+                System.out.println("Withdraw - amount cannot be 0 or negative.");
                 return null;
             }
         }

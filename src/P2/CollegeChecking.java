@@ -65,6 +65,11 @@ public class CollegeChecking extends Checking {
         return this.holder.toString() + "(CC)";
     }
 
+    @Override
+    public String toStringNoType() {
+        return this.holder.toString();
+    }
+
 
 
 

@@ -122,6 +122,10 @@ public class AccountDatabase {
         }
 
         selectedAccount.setBalance(-account.getBalance());
+        if (selectedAccount instanceof MoneyMarket) {
+            ((MoneyMarket) selectedAccount).updateLoyaltyStatus();
+            ((MoneyMarket) selectedAccount).incrementWithdrawal();
+        }
 
         return true;
     } //false if insufficient fund
@@ -131,6 +135,9 @@ public class AccountDatabase {
 
         Account selectedAccount = this.accounts[index];
         selectedAccount.setBalance(account.getBalance());
+        if (selectedAccount instanceof MoneyMarket) {
+            ((MoneyMarket) selectedAccount).updateLoyaltyStatus();
+        }
     }
 
     private boolean shouldSwap(Account a1, Account a2) {
@@ -174,14 +181,14 @@ public class AccountDatabase {
         System.out.println("\n*Accounts sorted by account type and profile.");
         for (int i = 0; i < numAcct; i++) {
             Account currentAccount = accounts[i];
-            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toString() + " :: Balance " + String.format("%.2s", currentAccount.getBalance());
+            String accountInfo = currentAccount.getClass().getSimpleName() + "::" + currentAccount.toStringNoType() + "::Balance " + String.format("$%,.2f", currentAccount.getBalance());
 
             if (currentAccount instanceof  CollegeChecking) {
                 CollegeChecking collegeAccount = (CollegeChecking) currentAccount;
                 accountInfo += "::" + collegeAccount.getCampus();
             } else if (currentAccount instanceof  MoneyMarket) {
                 MoneyMarket moneyMarketAccount = (MoneyMarket) currentAccount;
-                accountInfo += "::" + (moneyMarketAccount.loyaltyStatus() ? "is loyal" : "not loyal") + ":: withdrawal: " + moneyMarketAccount.withdrawalCount();
+                accountInfo += "::" + (moneyMarketAccount.loyaltyStatus() ? "is loyal" : "not loyal") + "::withdrawal: " + moneyMarketAccount.withdrawalCount();
             } else if (currentAccount instanceof Savings ){
                 Savings savingsAccount = (Savings) currentAccount;
                 accountInfo += savingsAccount.loyaltyStatus() ? "::is loyal" : "";
@@ -201,13 +208,13 @@ public class AccountDatabase {
         double monthlyFee = currentAccount.monthlyFee();
 
         // Display fees and interests with 2 decimal places
-        String formattedInterest = String.format("% 2f", montlyInterest);
-        String formattedFee = String.format(".2f", monthlyFee);
+        String formattedInterest = String.format("%.2f", montlyInterest);
+        String formattedFee = String.format("%.2f", monthlyFee);
 
-        String accountInfo = currentAccount.toString();
+        String accountInfo = currentAccount.toStringNoType();
 
         // Add with fee and monthly interest
-        System.out.println(accountInfo + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        System.out.println(accountInfo + " ::Balance " + String.format("$%,.2f", currentAccount.getBalance()) + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
     }
     System.out.println("*end of list.");
 

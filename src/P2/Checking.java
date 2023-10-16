@@ -55,4 +55,9 @@ public class Checking extends Account {
         return this.holder.toString() + "(C)";
     }
 
+    @Override
+    public String toStringNoType() {
+        return this.holder.toString();
+    }
+
 }
