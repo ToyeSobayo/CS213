@@ -7,7 +7,7 @@ package P2;
  * Provides methods for retrieving the account type and generating formatted strings.
  * Implements monthly interest and fee calculations based on the account's balance and loyalty status.
  * Uses constant values for annual interest rates, monthly fees, fee waivers, and bonuses.
- * @author [Toye Sobayo]
+ * @author [Toye Sobayo, Sean Thomas]
  */
 public class Savings extends Account {
 
@@ -110,6 +110,5 @@ public class Savings extends Account {
     public String toStringNoType() {
         return this.holder.toString();
     }
-
 
 }

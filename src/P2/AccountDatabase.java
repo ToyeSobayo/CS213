@@ -356,7 +356,7 @@ public class AccountDatabase {
             }
 
             else if (currentAccount instanceof MoneyMarket) {
-                // resetting the number of Withdrawls for MMS
+                // resetting the number of withdrawals for MMS
                 ((MoneyMarket) currentAccount).resetWithdrawals();
 
                 System.out.println(currentAccount.getProfileType() + "::Savings::" + currentAccount.toStringNoType() + "::Balance "

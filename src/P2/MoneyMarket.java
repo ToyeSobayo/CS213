@@ -7,7 +7,7 @@ package P2;
  * Calculates monthly interest and fees for the account.
  * Allows for resetting the withdrawal count.
  *
- * @author [Toye Sobayo]
+ * @author [Toye Sobayo, Sean Thomas]
  */
 public class MoneyMarket extends Savings {
 
@@ -108,7 +108,6 @@ public class MoneyMarket extends Savings {
      */
     public void incrementWithdrawal() {
         this.withdrawal += 1;
-
     }
 
     /**

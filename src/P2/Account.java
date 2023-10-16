@@ -79,7 +79,6 @@ public abstract class Account implements Comparable<Account> {
      * @param otherAccount The other account to compare to.
      * @return A negative integer, zero, or a positive integer if this account is less than, equal to, or greater than the specified account respectively.
      */
-
     @Override
     public  int compareTo(Account otherAccount) {
         // Implementation
@@ -104,10 +103,5 @@ public abstract class Account implements Comparable<Account> {
     public void setBalance(double value) {
         this.balance += value;
     }
-
-
-
-
-
 
 }

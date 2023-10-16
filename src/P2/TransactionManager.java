@@ -1,6 +1,5 @@
 package P2;
 
-
 import java.util.Scanner;
 
 /**
@@ -12,9 +11,13 @@ import java.util.Scanner;
  */
 public class TransactionManager {
 
-    private AccountDatabase db = new AccountDatabase();
-    private Scanner scanner = new Scanner(System.in);
+    private final AccountDatabase db = new AccountDatabase();
+    private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Take in commands, verify them, and carry them out
+     *
+     */
     public void run() {
 
         System.out.println("Transaction Manager is running\n");
@@ -132,7 +135,6 @@ public class TransactionManager {
 
             }
         }
-
     }
 
     /**
@@ -146,7 +148,11 @@ public class TransactionManager {
 
         String[] accountParts = input.strip().split("\\s+");
 
-        if (accountParts.length < 5) {
+        int TOKENS1 = 5;
+        int TOKENS2 = 6;
+        int BALANCE = 2000;
+
+        if (accountParts.length < TOKENS1) {
             System.out.println("Missing data for opening an account.");
             return null;
         }
@@ -200,7 +206,7 @@ public class TransactionManager {
         }
 
         else if (type.equals("CC")) {
-            if (accountParts.length < 6) {
+            if (accountParts.length < TOKENS2) {
                 System.out.println("Missing data for opening an account.");
                 return null;
             }
@@ -220,12 +226,10 @@ public class TransactionManager {
             }
 
             account = new CollegeChecking(profile, balance, campus);
-
-
         }
 
         else if (type.equals("S")) {
-            if (accountParts.length < 6) {
+            if (accountParts.length < TOKENS2) {
                 System.out.println("Missing data for opening an account.");
             }
 
@@ -238,15 +242,12 @@ public class TransactionManager {
         }
 
         else if (type.equals("MM")) {
-            if (balance < 2000) {
+            if (balance < BALANCE) {
                 System.out.println("Minimum of $2000 to open a Money Market account.");
                 return null;
             }
-
             account = new MoneyMarket(profile, balance, true);
-
         }
-
         return account;
     }
 
@@ -321,9 +322,7 @@ public class TransactionManager {
                 System.out.println("3Missing data for closing an account.");
                 return null;
             }
-
             account = new Savings(profile);
-
         }
 
         else if (type.equals("MM")) {
@@ -342,9 +341,11 @@ public class TransactionManager {
     private Account verifyThenDeposit(String input) {
         Account account = null;
 
+        int TOKENS = 5;
+
         String[] accountParts = input.strip().split("\\s+");
 
-        if (accountParts.length < 5) {
+        if (accountParts.length < TOKENS) {
             System.out.println("Missing data for opening an account.");
             return null;
         }
@@ -396,21 +397,14 @@ public class TransactionManager {
         if (type.equals("C")) {
             account = new Checking(profile, balance);
         }
-
         else if (type.equals("CC")) {
             account = new CollegeChecking(profile, balance);
         }
-
         else if (type.equals("S")) {
-
             account = new Savings(profile, balance);
-
         }
-
         else if (type.equals("MM")) {
-
             account = new MoneyMarket(profile, balance);
-
         }
 
         return account;
@@ -425,9 +419,11 @@ public class TransactionManager {
     private Account verifyThenWithdraw(String input) {
         Account account = null;
 
+        int TOKENS = 5;
+
         String[] accountParts = input.strip().split("\\s+");
 
-        if (accountParts.length < 5) {
+        if (accountParts.length < TOKENS) {
             System.out.println("Missing data for opening an account.");
             return null;
         }
@@ -479,21 +475,14 @@ public class TransactionManager {
         if (type.equals("C")) {
             account = new Checking(profile, balance);
         }
-
         else if (type.equals("CC")) {
             account = new CollegeChecking(profile, balance);
         }
-
         else if (type.equals("S")) {
-
             account = new Savings(profile, balance);
-
         }
-
         else if (type.equals("MM")) {
-
             account = new MoneyMarket(profile, balance);
-
         }
 
         return account;
@@ -532,7 +521,6 @@ public class TransactionManager {
                 return c;
             }
         }
-
         return null;
     }
 

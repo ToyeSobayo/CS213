@@ -6,7 +6,7 @@ import java.util.Calendar;
  * The date class allows us to represent a date object, consisting of a month, day, and year. It also has helper methods
  * isValid, isFuture, moreThanSix, and leapYear to help determine if a date is valid. Methods compareTo and equals are
  * also implemented to help with comparison of dates.
- * @author Toye Sobayo
+ * @author [Toye Sobayo, Sean Thomas]
  */
 
 public class Date implements Comparable<Date> {
@@ -127,15 +127,19 @@ public class Date implements Comparable<Date> {
                 if (leapYear(this.year)) {
                     // implement leapYear helper method
                     return (this.day >= minDays && this.day <= leapDay);
-                } else {
+                }
+                else {
                     return (this.day >= minDays && this.day <= nonLeapDay);
                 }
-            } else if (this.month == JANUARY || this.month == MARCH || this.month == MAY || this.month == JULY || this.month == AUGUST || this.month == OCTOBER || this.month == DECEMBER) {
+            }
+            else if (this.month == JANUARY || this.month == MARCH || this.month == MAY || this.month == JULY || this.month == AUGUST || this.month == OCTOBER || this.month == DECEMBER) {
                 return (this.day >= minDays && this.day <= max31Days);
-            } else {
+            }
+            else {
                 return (this.day > minDays && this.day < max30Days);
             }
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -146,7 +150,6 @@ public class Date implements Comparable<Date> {
      * @return true if the date is in the future, otherwise false.
      */
     public boolean isFuture() {
-
         Calendar potentialDate = Calendar.getInstance();
         potentialDate.set(this.year, this.month-1, this.day);
 
@@ -163,10 +166,11 @@ public class Date implements Comparable<Date> {
      * @return true if the date is more than six months in the future, otherwise false.
      */
     public boolean moreThanSix() {
+        int YEARS = 7;
         Calendar date = Calendar.getInstance();
         date.set(this.year, this.month, this.day);
         Calendar potentialDate = Calendar.getInstance();
-        potentialDate.add(Calendar.MONTH, 7);
+        potentialDate.add(Calendar.MONTH, YEARS);
         return date.compareTo(potentialDate) > 0;
     }
 
@@ -176,10 +180,11 @@ public class Date implements Comparable<Date> {
      * @return true if the date represents a person under sixteen, otherwise false.
      */
     public boolean underSixteen() {
+        int YEARS = 16;
         Calendar dob = Calendar.getInstance();
         dob.set(this.year, this.month - 1, this.day);
         Calendar potentialDate = Calendar.getInstance();
-        potentialDate.add(Calendar.YEAR, -16);
+        potentialDate.add(Calendar.YEAR, -YEARS);
         return dob.compareTo(potentialDate) > 0;
 
     }
@@ -190,10 +195,11 @@ public class Date implements Comparable<Date> {
      * @return true if the date represents a person over twenty-four, otherwise false.
      */
     public boolean overTwentyFour() {
+        int YEARS = 24;
         Calendar dob = Calendar.getInstance();
         dob.set(this.year, this.month - 1, this.day);
         Calendar potentialDate = Calendar.getInstance();
-        potentialDate.add(Calendar.YEAR, -24);
+        potentialDate.add(Calendar.YEAR, -YEARS);
         return dob.compareTo(potentialDate) < 0;
     }
 
