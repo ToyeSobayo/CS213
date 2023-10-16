@@ -115,7 +115,7 @@ public class TransactionManager {
                     break;
 
                 case "Q":
-                    System.out.println("Transaction manager is terminated.");
+                    System.out.println("Transaction Manager is terminated.");
                     System.exit(1);
 
                 default:
