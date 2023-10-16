@@ -39,6 +39,8 @@ public abstract class Account implements Comparable<Account> {
 
     public abstract String toString();
 
+    public abstract String toStringNoType();
+
     public abstract String getProfileType();
 
     /**

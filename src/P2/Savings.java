@@ -59,5 +59,10 @@ public class Savings extends Account {
         return this.holder.toString() + "(S)";
     }
 
+    @Override
+    public String toStringNoType() {
+        return this.holder.toString();
+    }
+
 
 }

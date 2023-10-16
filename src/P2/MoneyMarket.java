@@ -71,6 +71,11 @@ public class MoneyMarket extends Savings {
         return this.holder.toString() + "(MM)";
     }
 
+    @Override
+    public String toStringNoType() {
+        return this.holder.toString();
+    }
+
     public void resetWithdrawals() {
         withdrawal = 0;
     }
