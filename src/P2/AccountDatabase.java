@@ -123,8 +123,8 @@ public class AccountDatabase {
 
         selectedAccount.setBalance(-account.getBalance());
         if (selectedAccount instanceof MoneyMarket) {
-            ((MoneyMarket) selectedAccount).updateLoyaltyStatus();
             ((MoneyMarket) selectedAccount).incrementWithdrawal();
+            ((MoneyMarket) selectedAccount).updateLoyaltyStatus();
         }
 
         return true;
