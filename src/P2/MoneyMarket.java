@@ -33,10 +33,10 @@ public class MoneyMarket extends Savings {
 
     public double monthlyInterest() {
         if (this.isLoyal) {
-            return ((balance * (ANNUAL_INTEREST_RATE + BONUS)) / MONTH);
+            return (((double)balance * (ANNUAL_INTEREST_RATE + BONUS)) / MONTH);
         }
 
-        return (balance * ANNUAL_INTEREST_RATE / MONTH);
+        return ((double)balance * ANNUAL_INTEREST_RATE / MONTH);
 
     }
 
