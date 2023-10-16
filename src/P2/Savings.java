@@ -7,7 +7,7 @@ public class Savings extends Account {
     protected boolean isLoyal;
     protected static final double MONTHLY_FEE = 25;
     private static final double FEE_WAIVER = 500;
-    protected static final double BONUS = 0.025;
+    protected static final double BONUS = 0.0025;
 
 
 
