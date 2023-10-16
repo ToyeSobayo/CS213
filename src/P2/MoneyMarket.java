@@ -32,7 +32,7 @@ public class MoneyMarket extends Savings {
 
 
     public double monthlyInterest() {
-        return ((ANNUAL_INTEREST_RATE + BONUS) / MONTH);
+        return ((balance * (ANNUAL_INTEREST_RATE + BONUS)) / MONTH);
     }
 
     public double monthlyFee() {
