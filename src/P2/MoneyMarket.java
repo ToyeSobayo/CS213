@@ -36,10 +36,17 @@ public class MoneyMarket extends Savings {
     }
 
     public double monthlyFee() {
-        if (balance >= MINIMUM_DEPOSIT) {
-            return 0;
+        double fee = 0;
+
+        if (balance < MINIMUM_DEPOSIT) {
+            fee += MONTHLY_FEE;
         }
-        return MONTHLY_FEE;
+
+        if (this.withdrawal > WITHDRAWAL_THRESHOLD) {
+            fee += FEE;
+        }
+
+        return fee;
     }
 
     public void updateLoyaltyStatus() {
