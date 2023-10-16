@@ -200,7 +200,19 @@ public class AccountDatabase {
 
     //sort by account type and profile
 
+
     public void printFeesAndInterests() {
+        // Bubble sort
+        for (int i = 0; i < numAcct - 1; i++) {
+            for (int j = 0; j < numAcct - i - 1; j++) {
+                if (shouldSwap(accounts[j], accounts[j + 1])) {
+                    // Swap accounts[j + 1] and accounts[j]
+                    Account temp = accounts[j];
+                    accounts[j] = accounts[j + 1];
+                    accounts[j + 1] = temp;
+                }
+            }
+        }
         System.out.println("*list of accounts with fee and monthly interest");
     for (int i = 0; i < numAcct; i++) {
         Account currentAccount = accounts[i];
@@ -214,7 +226,7 @@ public class AccountDatabase {
         String accountInfo = currentAccount.toStringNoType();
 
         // Add with fee and monthly interest
-        System.out.println(accountInfo + " ::Balance " + String.format("$%,.2f", currentAccount.getBalance()) + ":: fee $" + formattedFee + "::monthly interest $" + formattedInterest);
+        System.out.println(accountInfo + "::Balance " + String.format("$%,.2f", currentAccount.getBalance()) + "::fee $" + formattedFee + "::monthly interest $" + formattedInterest);
     }
     System.out.println("*end of list.");
 
