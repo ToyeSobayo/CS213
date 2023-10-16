@@ -32,7 +32,12 @@ public class MoneyMarket extends Savings {
 
 
     public double monthlyInterest() {
-        return ((balance * (ANNUAL_INTEREST_RATE + BONUS)) / MONTH);
+        if (this.isLoyal) {
+            return ((balance * (ANNUAL_INTEREST_RATE + BONUS)) / MONTH);
+        }
+
+        return (balance * ANNUAL_INTEREST_RATE / MONTH);
+
     }
 
     public double monthlyFee() {
@@ -55,16 +60,13 @@ public class MoneyMarket extends Savings {
         }
 
         if (this.balance >= MINIMUM_DEPOSIT) {
-            this.isLoyal = false;
+            this.isLoyal = true;
         }
     }
 
 
 
     public double withdrawalCount() {
-        if (withdrawal > WITHDRAWAL_THRESHOLD) {
-            return FEE;
-        }
         return withdrawal;
     }
 
